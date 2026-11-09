@@ -6,6 +6,9 @@ const cors = require("cors");
 const db = require("./db");
 const signupRoutes = require("./routes/signupRoutes");
 const loginRoutes = require("./routes/loginRoutes");
+const emergencyContactRoutes = require(
+    "./routes/emergencyContactRoutes"
+);
 
 const app = express();
 
@@ -57,7 +60,10 @@ app.get("/api/health/db", async (req, res) => {
 // Signup and login routes
 app.use("/api/auth", signupRoutes);
 app.use("/api/auth", loginRoutes);
-
+app.use(
+    "/api/emergency-contacts",
+    emergencyContactRoutes
+);
 
 // Unknown route handler
 app.use((req, res) => {

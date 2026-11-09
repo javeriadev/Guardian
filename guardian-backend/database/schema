@@ -69,3 +69,34 @@ CREATE TABLE IF NOT EXISTS EMAIL_VERIFICATION_OTPS (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
+
+  -- ==========================================
+-- EMERGENCY CONTACTS TABLE
+-- ==========================================
+
+CREATE TABLE IF NOT EXISTS EMERGENCY_CONTACTS (
+    contact_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    contact_name VARCHAR(150) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    priority INT NOT NULL,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at DATETIME NOT NULL
+        DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_emergency_contacts_user
+        FOREIGN KEY (user_id)
+        REFERENCES USERS(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT uq_emergency_contact_phone
+        UNIQUE (user_id, phone_number),
+
+    CONSTRAINT uq_emergency_contact_priority
+        UNIQUE (user_id, priority)
+        
+);
+
