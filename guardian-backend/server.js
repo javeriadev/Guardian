@@ -9,6 +9,7 @@ const loginRoutes = require("./routes/loginRoutes");
 const emergencyContactRoutes = require(
     "./routes/emergencyContactRoutes"
 );
+const incidentRoutes = require("./routes/incidentRoutes");
 
 const app = express();
 
@@ -60,10 +61,13 @@ app.get("/api/health/db", async (req, res) => {
 // Signup and login routes
 app.use("/api/auth", signupRoutes);
 app.use("/api/auth", loginRoutes);
+// Emergency contact routes
 app.use(
     "/api/emergency-contacts",
     emergencyContactRoutes
 );
+// Emergency incident routes
+app.use("/api/incidents", incidentRoutes);
 
 // Unknown route handler
 app.use((req, res) => {
